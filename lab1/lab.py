@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import math
 def q1(img):
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     cv2.imshow('grey',gray)
@@ -20,12 +21,32 @@ def q2(img):
     plt.show()
 
 
-  
+def q3(img):
+    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    img = np.array(img)
+    sx = np.array([[-1,0,1],[-2,0,2],[-1,0,1]],dtype=np.float)
+    sy = np.array([[-1,-2,-1],[0,0,0],[1,2,1]],dtype=np.float)
+   
+    gx =cv2.filter2D(img,-1,sx)
+    gy =cv2.filter2D(img,-1,sy)
+    cv2.imshow('q3x',gx/np.max(gx))
+    cv2.imshow('q3y',gy/np.max(gy))
 
+
+def q4(img):
+    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(img,(3,3),1,1)
+    img1 = img-blur
+    img1 = 1.25*img1
+    img = img +img1
+    cv2.imshow('4',blur)
+    cv2.imshow('q4',img/np.max(img))
 
 
 if __name__ == "__main__":
     img = cv2.imread('cat.png')
-    q1(img)
-    q2(img)
-    
+    # q1(img)
+    # q2(img)
+    # q3(img)
+    q4(img)
+    cv2.waitKey(0)

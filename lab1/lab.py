@@ -17,12 +17,12 @@ def q1(img):
     cv2.imshow("Question1",new_Image/255)
 
 def q2(img):
-    plt.hist(img.ravel(),256,[0,256]);
+    plt.hist(img.ravel(),256,[0,256])
     plt.show()
 
 
 def q3(img):
-    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    img = cv2.cvtColor(img,cv2.IMREAD_GRAYSCALE)
     img = np.array(img)
     sx = np.array([[-1,0,1],[-2,0,2],[-1,0,1]],dtype=np.float)
     sy = np.array([[-1,-2,-1],[0,0,0],[1,2,1]],dtype=np.float)
@@ -36,15 +36,17 @@ def q3(img):
 def q4(img):
     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(img,(3,3),1,1)
-    img1 = img-blur
-    img1 = 1.25*img1
+    img1 = cv2.subtract(img,blur)
+    img1 = 1.25*img1 #result would be more clear as this constant goes up
     img = img +img1
     cv2.imshow('4',blur)
-    cv2.imshow('q4',img/np.max(img))
+    cv2.imshow('q4',(img).astype(np.uint8))
+    cv2.imwrite("q4.png",(img).astype(np.uint8))
 
 
 if __name__ == "__main__":
     img = cv2.imread('cat.png')
+    print(img.shape)
     # q1(img)
     # q2(img)
     # q3(img)

@@ -61,6 +61,7 @@ if __name__ == "__main__":
     min_filter = minFilter(max_filter,height,width,N).astype(np.uint8)
     cv2.imshow('A',max_filter/np.max(max_filter))
     cv2.imshow('B',min_filter/np.max(min_filter))
+    cv2.imwrite("B.png",min_filter.astype(np.uint8))
     # print(max_filter)
     # print(min_filter)
 
@@ -68,5 +69,6 @@ if __name__ == "__main__":
 
     print(backgroundSub)
     cv2.imshow('task2',backgroundSub/np.max(backgroundSub))
+    cv2.imwrite("output.png",backgroundSub.astype(np.uint8))
  
     cv2.waitKey(0)
